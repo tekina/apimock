@@ -1,6 +1,6 @@
 ActiveAdmin.register Api do
   actions :index, :show, :new, :create, :update, :edit
-  permit_params :endpoint, :required_params, :required_headers, :success_response, :error_response
+  permit_params :endpoint, :request_type, :required_params, :required_headers, :success_response, :error_response
 
   index do
     selectable_column
@@ -25,7 +25,7 @@ ActiveAdmin.register Api do
   form do |f|
     f.inputs do
       f.input :endpoint, as: :string, label: "Endpoint (eg: /v4/home/cities) - leading '/' required"
-      f.input :request_type, as: :select, label: "Request Type", collection: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], include_blank: false
+      f.input :request_type, as: :select, label: "Request Type", collection: Api::REQUEST_TYPES, include_blank: false
       f.input :required_params, as: :string, label: "Required params (eg: platform, version) - csv"
       f.input :required_headers, as: :string, label: "Required headers (eg: auth-token) - csv (Work in Progress, not functional)"
       f.input :success_response, as: :text, label: "Success Response (JSON format only)"

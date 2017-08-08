@@ -1,5 +1,7 @@
 class Api < ApplicationRecord
 
+  REQUEST_TYPES = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
+
   def self.handle(endpoint, request_type, params, headers)
     obj = Api.find_by(endpoint: endpoint) rescue nil
     if obj.nil? || obj.request_type.upcase != request_type

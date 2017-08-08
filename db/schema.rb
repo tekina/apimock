@@ -29,13 +29,13 @@ ActiveRecord::Schema.define(version: 20170806080857) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
-  create_table "apis", id: :bigint, default: -> { "nextval('endpoints_id_seq'::regclass)" }, force: :cascade do |t|
+  create_table "apis", force: :cascade do |t|
     t.string "endpoint", null: false
-    t.string "request_type", default: "get", null: false
+    t.string "request_type", null: false
     t.string "required_params"
     t.string "required_headers"
-    t.string "success_response", null: false
-    t.string "error_response"
+    t.text "success_response", null: false
+    t.text "error_response"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
