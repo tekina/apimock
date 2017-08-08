@@ -6,6 +6,7 @@ ActiveAdmin.register Api do
     selectable_column
     id_column
     column :endpoint
+    column :request_type
     column :required_params
     column :required_headers
     column :success_response do |api|
