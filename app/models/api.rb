@@ -5,12 +5,12 @@ class Api < ApplicationRecord
     if obj.nil? || obj.request_type.upcase != request_type
       return { code: 404, msg: 'Endpoint Not Found' }
     end
-    header_error = obj.verify_headers(headers.keys)
+    # header_error = obj.verify_headers(headers.keys)
 
     # check if all required headers are present in request
-    if header_error.length > 0
-      return { code: 500, msg: "Missing headers: #{error}" }
-    end
+    # if header_error.length > 0
+    #   return { code: 500, msg: "Missing headers: #{header_error}" }
+    # end
 
     # check if all required params are present in request
     params_error = obj.verify_params(params.keys)
