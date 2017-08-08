@@ -5,7 +5,7 @@ class Api < ApplicationRecord
   def self.handle(endpoint, request_type, params, headers)
     obj = Api.find_by(endpoint: endpoint) rescue nil
     if obj.nil? || obj.request_type.upcase != request_type
-      return [{ status: 0, msg: 'Endpoint Not Found' }, 500]
+      return [{ status: 0, msg: 'Endpoint Not Found' }, 404]
     end
     # header_error = obj.verify_headers(headers.keys)
 
