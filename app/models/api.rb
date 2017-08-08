@@ -5,24 +5,24 @@ class Api < ApplicationRecord
   def self.handle(endpoint, request_type, params, headers)
     obj = Api.find_by(endpoint: endpoint) rescue nil
     if obj.nil? || obj.request_type.upcase != request_type
-      return { code: 404, msg: 'Endpoint Not Found' }
+      return [{ status: 0, msg: 'Endpoint Not Found' }, 500]
     end
     # header_error = obj.verify_headers(headers.keys)
 
     # check if all required headers are present in request
     # if header_error.length > 0
-    #   return { code: 500, msg: "Missing headers: #{header_error}" }
+    #   return [{ status: 0, msg: "Missing params: #{header_error}" }, 500]
     # end
 
     # check if all required params are present in request
     params_error = obj.verify_params(params.keys)
     if params_error.length > 0
-      return { code: 500, msg: "Missing params: #{params_error}" }
+      return [{ status: 0, msg: "Missing params: #{params_error}" }, 500]
     end
 
     # all good, parse and return success_response
     # YAML might fail for some cases, but JSON will work in those cases
-    return YAML.load(obj.success_response) rescue JSON.load(obj.success_response)
+    return [YAML.load(obj.success_response), 200] rescue [JSON.load(obj.success_response), 200]
   end
 
   # returns a list of missing params, if any

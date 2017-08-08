@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
   def run
     request_url = '/' + params[:url]
     params.delete(:url)
-    render json: Api.handle(request_url, request.method, params, headers)
+    resp, status = Api.handle(request_url, request.method, params, headers)
+    render json: resp, status: status
   end
 
 
