@@ -24,7 +24,7 @@ ActiveAdmin.register Api do
   form do |f|
     f.inputs do
       f.input :endpoint, as: :string, label: "Endpoint (eg: /v4/home/cities) - leading '/' required"
-      f.input :request_type, as: :string, label: "Request Type (get, post, put, delete etc.)"
+      f.input :request_type, as: :select, label: "Request Type (get, post, put, delete etc.)", collection: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
       f.input :required_params, as: :string, label: "Required params (eg: platform, version) - comma separated"
       f.input :required_headers, as: :string, label: "Required headers (eg: auth-token) - comma separated"
       f.input :success_response, as: :text, label: "Success Response (JSON format only)"
